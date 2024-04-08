@@ -121,13 +121,14 @@ let timerStart = function() {
       answer = null;
       $('#equation').text("Time's up!")
     }
-    if ($('#testLength').val() !== 0) {
-      if (score >= $('#testLength').val()) {
+    if ($('#testLength').val() > 0) {
+      if (score.toString() === $('#slider-val').text()) {
         clearInterval(timer);
         $('#equation').text("Congratulations! You beat the timer!");
       }
     }
-  }
+
+
   let timer = setInterval(countdown, 1000);
   
   timer;
