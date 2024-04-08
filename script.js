@@ -127,7 +127,7 @@ let timerStart = function() {
         $('#equation').text("Congratulations! You beat the timer!");
       }
     }
-
+  }
 
   let timer = setInterval(countdown, 1000);
   
