@@ -154,4 +154,4 @@ $(document).ready(function() {
   });
   $('#answer').on('keyup', scoreEval);
   $('#answer').on('keypress', timerStart);
-})
+});
