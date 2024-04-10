@@ -29,29 +29,50 @@ let answer;
 let problemGen = function() {
   let numFirst;
   let numSecond;
+  let num1;
+  let num2;
   let operator = equationChoose();
+  let slider = $("#testLength").val();
 
   let numGen = function() {
-    if (operator === "*") {
-      num1 = Math.floor(Math.random() * 20) + 1; 
-      num2 = Math.floor(Math.random() * 10) + 1;
-    } else {
       num1 = Math.floor(Math.random() * 100) + 1; 
       num2 = Math.floor(Math.random() * 100) + 1;
+
+      if (slider > 0) {
+        while (num1 > slider) {
+          num1 = Math.floor(Math.random() * 100) + 1;
+          if (num1 <= slider) {
+            break;
+          }
+        }
+        
+        while (num2 > slider) {
+          num2 = Math.floor(Math.random() * 100) + 1;
+          if (num2 <= slider) {
+            break;
+          }
+        }
+      }
+
+      if (num1 >= num2) {
+        numFirst = num1;
+        numSecond = num2;
+      } else if (num2 > num1) {
+        numFirst = num2;
+        numSecond = num1;
+      }
+
+    console.log(num1, num2);
+
+    console.log(numFirst);
+    console.log(numSecond);
+    return numFirst, numSecond
     }
+
     
-    if (num1 >= num2) {
-      numFirst = num1;
-      numSecond = num2;
-      
-    } else if (num2 > num1) {
-      numFirst = num2;
-      numSecond = num1;
-      
-    }
+    
     // console.log(numFirst);
     // console.log(numSecond);
-  }
 
   numGen();
 
@@ -121,14 +142,7 @@ let timerStart = function() {
       answer = null;
       $('#equation').text("Time's up!")
     }
-    if ($('#testLength').val() > 0) {
-      if (score.toString() === $('#slider-val').text()) {
-        clearInterval(timer);
-        $('#equation').text("Congratulations! You beat the timer!");
-      }
-    }
   }
-
   let timer = setInterval(countdown, 1000);
   
   timer;
