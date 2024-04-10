@@ -137,10 +137,11 @@ let timerStart = function() {
   let countdown = function() {
     count--;
     $('#timer').text(count);
-    if (count === 0) {
+    if (count <= 0) {
       clearInterval(timer);
       answer = null;
-      $('#equation').text("Time's up!")
+      $('#equation').text("Time's up!");
+      $('.btn-ready').on('click', btnReady);
     }
   }
   let timer = setInterval(countdown, 1000);
@@ -155,18 +156,21 @@ let sliderVal = function() {
   $('#slider-val').text(val);
 }
 
+let btnReady = function() {
+  count = 10;
+  score = 0;
+  $('#current-score').text(score);
+  $('#timer').text(count);
+  problemGen();
+  timerStart();
+  $('.btn-ready').off('click', btnReady);
+}
+
 $(document).ready(function() {
   problemGen();
   sliderVal();
   $('#testLength').on('change', sliderVal);
-  $('.btn-ready').on('click', function() {
-    count = 10;
-    score = 0;
-    $('#current-score').text(score);
-    $('#timer').text(count);
-    problemGen();
-    timerStart();
-  });
+  $('.btn-ready').on('click', btnReady);
   $('#answer').on('keyup', scoreEval);
   $('#answer').on('keypress', timerStart);
 });
