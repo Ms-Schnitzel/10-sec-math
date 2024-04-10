@@ -38,6 +38,7 @@ let problemGen = function() {
       num1 = Math.floor(Math.random() * 100) + 1; 
       num2 = Math.floor(Math.random() * 100) + 1;
 
+    if (operator !== "/") {
       if (slider > 0) {
         while (num1 > slider) {
           num1 = Math.floor(Math.random() * 100) + 1;
@@ -53,6 +54,14 @@ let problemGen = function() {
           }
         }
       }
+    } else if (operator === "/") {
+      if (slider > 0) {  
+        while (num1 / num2 > slider || num2 / num1 > slider) {
+        num1 = Math.floor(Math.random() * 100) + 1;
+        num2 = Math.floor(Math.random() * 100) + 1;
+        }
+      }
+    }
 
       if (num1 >= num2) {
         numFirst = num1;
